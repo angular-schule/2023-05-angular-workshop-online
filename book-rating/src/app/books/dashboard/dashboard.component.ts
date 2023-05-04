@@ -12,7 +12,6 @@ export class DashboardComponent {
   // books2!: Book[]; // Non-Null Assertion – nicht verwenden!!
 
 
-
   constructor() {
     this.books = [
       {
@@ -31,15 +30,13 @@ export class DashboardComponent {
       }
     ];
   }
+
+  doRateUp(book: Book) {
+    console.log('UP', book);
+  }
+
+  doRateDown(book: Book) {
+    console.log('DOWN', book);
+  }
 }
-
-
-/*
-TODO
-- Speicherort der Daten
-- Daten
-- Anzeige (Kindkomponente?)
-
-*/
-
 
