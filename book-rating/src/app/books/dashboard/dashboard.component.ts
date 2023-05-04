@@ -9,6 +9,9 @@ import { Book } from '../shared/book';
 })
 export class DashboardComponent {
   books: Book[] = [];
+  // books2!: Book[]; // Non-Null Assertion – nicht verwenden!!
+
+
 
   constructor() {
     this.books = [

@@ -6,3 +6,8 @@ export interface Book {
   rating: number;
   // authors: string[];
 }
+
+
+// Argumente für Interface
+// - Serialisierbarkeit / JSON
+// - Klonbarkeit

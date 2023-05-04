@@ -7,5 +7,6 @@ import { Book } from '../shared/book';
   styleUrls: ['./book.component.scss']
 })
 export class BookComponent {
+  // hier dürfen Daten von der Elternkomponente hineinfließen
   @Input() book?: Book;
 }
