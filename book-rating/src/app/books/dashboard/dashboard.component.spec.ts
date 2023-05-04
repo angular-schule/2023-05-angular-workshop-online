@@ -14,6 +14,8 @@ describe('DashboardComponent', () => {
 
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
+    // DOM-Zugriff:
+    // const element = fixture.nativeElement.querySelector('h2');
     fixture.detectChanges();
   });
 
