@@ -22,4 +22,6 @@ describe('DashboardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should call service.rateUp() for doRateUp()', () => {});
 });
