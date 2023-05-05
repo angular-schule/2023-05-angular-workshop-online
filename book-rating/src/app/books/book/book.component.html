@@ -15,5 +15,13 @@
 
     <button type="button" class="btn-green" (click)="doRateUp()"> + </button>
     <button type="button" class="btn-red" (click)="doRateDown()"> – </button>
+
+    <a [routerLink]="['/books', book.isbn]">Details</a>
+    <!--<a [routerLink]="'/books/' + book.isbn">Details</a>
+      <a routerLink="/books/{{ book.isbn }}">Details</a>
+      <a [routerLink]="book.isbn">Details</a>
+      <a [routerLink]="[book.isbn]">Details</a>
+      <a routerLink="{{ book.isbn }}">Details</a>
+    -->
   </div>
 </div>
