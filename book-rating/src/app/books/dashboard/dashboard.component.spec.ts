@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Book } from '../shared/book';
 import { BookRatingService } from '../shared/book-rating.service';
+import { of } from 'rxjs';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -13,6 +14,11 @@ describe('DashboardComponent', () => {
     const ratingMock = {
       rateUp: (b: Book) => b,
       rateDown: (b: Book) => b
+    };
+
+    // Ergänzung: Stub für BookStoreService
+    const storeMock = {
+      getAll: () => of<Book[]>([])
     };
 
     await TestBed.configureTestingModule({
