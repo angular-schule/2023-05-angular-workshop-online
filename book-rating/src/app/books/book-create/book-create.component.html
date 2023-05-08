@@ -1,28 +1,35 @@
-<form>
+<form [formGroup]="bookForm">
 
   <div class="form-group">
     <label>ISBN</label>
-    <input type="text" class="form-control">
+    <input type="text" class="form-control" formControlName="isbn">
+    <div class="feedback-error" *ngIf="isInvalid('isbn')">Die ISBN ist ungültig.</div>
+    <div class="feedback-error" *ngIf="hasError('isbn', 'required')">Die ISBN fehlt!</div>
+    <div class="feedback-error" *ngIf="hasError('isbn', 'minlength')">Die ISBN ist zu kurz.</div>
+    <div class="feedback-error" *ngIf="hasError('isbn', 'maxlength')">Die ISBN ist zu lang.</div>
   </div>
 
   <div class="form-group">
     <label>Title</label>
-    <input type="text" class="form-control">
+    <input type="text" class="form-control" formControlName="title">
   </div>
 
   <div class="form-group">
     <label>Description</label>
-    <input type="text" class="form-control">
+    <input type="text" class="form-control" formControlName="description">
   </div>
 
   <div class="form-group">
     <label>Rating</label>
-    <input type="number" class="form-control">
+    <input type="number" class="form-control" formControlName="rating">
   </div>
 
   <div class="form-group">
     <label>Preis</label>
-    <input type="number" class="form-control">
+    <input type="number" class="form-control" formControlName="price">
   </div>
 
 </form>
+
+
+<pre>{{ bookForm.value | json }}</pre>
