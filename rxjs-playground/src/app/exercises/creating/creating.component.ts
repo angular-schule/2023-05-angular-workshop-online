@@ -63,8 +63,6 @@ export class CreatingComponent {
     const myObs$ = new Observable(producer);
     // myObs$.subscribe(obs);
 
-
-
     /******************************/
   }
 
