@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Book } from '../shared/book';
+import { BookStoreService } from '../shared/book-store.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book-create',
@@ -36,6 +39,8 @@ export class BookCreateComponent {
     price: new FormControl(0, { nonNullable: true, validators: [Validators.min(0)] })
   });
 
+  constructor(private bs: BookStoreService, private router: Router) {}
+
   isInvalid(controlName: string): boolean {
     const control = this.bookForm.get(controlName);
 
@@ -57,6 +62,15 @@ export class BookCreateComponent {
     // return control.getError(errorCode) && control.touched;
     // return control.errors?.[errorCode] && control.touched;
   }
+
+  submitForm() {
+    const newBook: Book = this.bookForm.getRawValue();
+
+    this.bs.create(newBook).subscribe(receivedBook => {
+      this.router.navigate(['/books', receivedBook.isbn]); // Detailseite
+    });
+
+  }
 }
 
 
@@ -64,6 +78,7 @@ export class BookCreateComponent {
 TODO
 - Validierung
 - Fehlermeldungen anzeigen
+
 - Button
 - abschicken
 - Formularwert => Buch
