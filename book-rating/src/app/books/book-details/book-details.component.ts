@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookStoreService } from '../shared/book-store.service';
 import { Book } from '../shared/book';
-import { map, switchMap } from 'rxjs';
+import { Observable, map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-book-details',
@@ -11,18 +11,16 @@ import { map, switchMap } from 'rxjs';
 })
 export class BookDetailsComponent {
 
-  book?: Book;
+  book$: Observable<Book>;
 
   constructor(private route: ActivatedRoute, private bs: BookStoreService) {
     // PULL
     // const isbn = this.route.snapshot.paramMap.get('isbn'); // path: 'books/:isbn'
 
     // PUSH
-    this.route.paramMap.pipe(
+    this.book$ = this.route.paramMap.pipe(
       map(params => params.get('isbn')!),
       switchMap(isbn => this.bs.getSingle(isbn))
-    ).subscribe(book => {
-      this.book = book;
-    });
+    );
   }
 }
