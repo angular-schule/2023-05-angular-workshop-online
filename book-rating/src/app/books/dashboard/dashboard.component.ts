@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { Book } from '../shared/book';
 import { BookRatingService } from '../shared/book-rating.service';
 import { BookStoreService } from '../shared/book-store.service';
+import { Store } from '@ngrx/store';
+import { loadBooks } from '../store/book.actions';
+import { map } from 'rxjs';
+import { selectBooks, selectLoading } from '../store/book.selectors';
 
 
 @Component({
@@ -13,10 +17,19 @@ export class DashboardComponent {
   books: Book[] = [];
   // books2!: Book[]; // Non-Null Assertion – nicht verwenden!!
 
-  constructor(private rs: BookRatingService, private bs: BookStoreService) {
-    this.bs.getAll().subscribe(books => {
+  constructor(private rs: BookRatingService, private bs: BookStoreService, private store: Store) {
+    /*this.bs.getAll().subscribe(books => {
+      this.books = books;
+    });*/
+
+    // TODO: AsyncPipe verwenden
+    this.store.select(selectBooks).subscribe(books => {
       this.books = books;
     });
+
+    this.store.dispatch(loadBooks());
+    this.store.dispatch({ type: 'HELLO WORLD' });
+
   }
 
   doRateUp(book: Book) {
