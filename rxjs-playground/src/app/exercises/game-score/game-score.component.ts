@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Subject, ReplaySubject, scan, reduce } from 'rxjs';
+import { Subject, ReplaySubject, scan, reduce, map, of } from 'rxjs';
 import { HistoryComponent } from '../../shared/history/history.component';
 
 @Component({
@@ -21,6 +21,15 @@ export class GameScoreComponent {
      */
 
     /******************************/
+
+    this.score$.pipe(
+      scan((acc, item, index) => acc + item, 0)
+    ).subscribe(e => {
+      this.currentScore = e;
+    })
+
+
+    // setTimeout(() => this.score$.complete(), 10000)
 
 
     /******************************/

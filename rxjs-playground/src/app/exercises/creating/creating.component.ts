@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable, of, from, timer, interval, ReplaySubject, map, filter, Subscriber, Observer } from 'rxjs';
+import { Observable, of, from, timer, interval, ReplaySubject, map, filter, Subscriber, Observer, TeardownLogic } from 'rxjs';
 import { HistoryComponent } from '../../shared/history/history.component';
 
 @Component({
@@ -42,14 +42,20 @@ export class CreatingComponent {
 
     /******************************/
 
-    function producer(sub: Subscriber<number>) {
+    function producer(sub: Subscriber<number>): TeardownLogic {
       const result = Math.random();
       sub.next(result);
 
       sub.next(10);
 
-      setTimeout(() => sub.next(20), 2000);
-      setTimeout(() => sub.complete(), 5000);
+      const timer1 = setTimeout(() => sub.next(20), 2000);
+      const timer2 = setTimeout(() => sub.complete(), 5000);
+
+      // Teardown Logic
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+      };
 
     }
 
@@ -61,7 +67,8 @@ export class CreatingComponent {
 
     // producer(obs);
     const myObs$ = new Observable(producer);
-    // myObs$.subscribe(obs);
+    const sub = myObs$.subscribe(obs);
+    sub.unsubscribe()
 
     /******************************/
   }

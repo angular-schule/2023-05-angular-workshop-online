@@ -22,6 +22,7 @@ export class ExerciseService {
       } else {
         console.log(successMsg);
         observer.next(successMsg);
+        observer.complete();
       }
     });
   }
